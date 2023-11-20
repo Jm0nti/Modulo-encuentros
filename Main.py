@@ -1,13 +1,12 @@
 import sqlite3
-from Doctor import Doctor
-from nurse import Nurse
-from patient import Patient
-from Encounter import Encounter
+from Clases.Doctor import Doctor
+from Clases.nurse import Nurse
+from Clases.Encounter import Encounter
 
 
 # Función para autenticar médico o enfermera
 def authenticate_user(user_type):
-    conn = sqlite3.connect(f'{user_type}.db')
+    conn = sqlite3.connect(f'BDs/{user_type}.db')
     cursor = conn.cursor()
 
     name = input("Ingrese su nombre: ")
@@ -55,7 +54,7 @@ def add_encounter(user_type):
     date = input("Ingrese la fecha del encuentro (YYYY-MM-DD): ")
     observations = input("Ingrese las observaciones: ")
 
-    conn = sqlite3.connect('encuentros.db')
+    conn = sqlite3.connect('BDs/encuentros.db')
     cursor = conn.cursor()
 
     if user_type == 'Medico':
