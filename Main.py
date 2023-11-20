@@ -58,14 +58,14 @@ def add_encounter(user_type):
     conn = sqlite3.connect('encuentros.db')
     cursor = conn.cursor()
 
-    if user_type == 'doctor':
+    if user_type == 'Medico':
         subjective = input("Ingrese la información subjetiva: ")
         objective = input("Ingrese la información objetiva: ")
         diagnosis = input("Ingrese el diagnóstico: ")
 
         cursor.execute('INSERT INTO Encuentros (ID, fecha, Subjetivo, Objetivo, diagnostico, observaciones) VALUES (?, ?, ?, ?, ?, ?)',
                        (patient_id, date, subjective, objective, diagnosis, observations))
-    elif user_type == 'nurse':
+    elif user_type == 'Enfermero':
         cursor.execute('INSERT INTO Encuentros (ID, fecha, observaciones) VALUES (?, ?, ?)',
                        (patient_id, date, observations))
 
@@ -83,18 +83,18 @@ def start_program():
         user_type_option = input("Seleccione una opción: ")
 
         if user_type_option == '1':
-            user_type = 'medico'
+            user_type = 'Medico'
         elif user_type_option == '2':
-            user_type = 'enfermero'
+            user_type = 'Enfermero'
         elif user_type_option == '3':
             break
         else:
             print("Opción inválida. Por favor, seleccione una opción válida.")
 
-        if user_type in ['medico', 'enfermero']:
+        if user_type in ['Medico', 'Enfermero']:
             user = authenticate_user(user_type)
             if user:
-                if user_type == 'medico1':
+                if user_type == 'Medico':
                     doctor_menu()
                 else:
                     nurse_menu()
