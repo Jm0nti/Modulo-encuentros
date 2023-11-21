@@ -9,15 +9,16 @@ class Encounter:
         self.diagnosis = diagnosis
         self.observations = observations
 
+    # Funcion para guardar los datos recolectados de encuentro (medico/enfermero) en la base de datos
     def save_to_database(self):
-        conn = sqlite3.connect('encuentros.db')
+        conn = sqlite3.connect('BDs/encuentros.db')
         cursor = conn.cursor()
 
         if self.subjective is not None:
-            cursor.execute('INSERT INTO Encuentros (ID_paciente, fecha, Subjetivo, Objetivo, diagnostico, observaciones) VALUES (?, ?, ?, ?, ?, ?)',
+            cursor.execute('INSERT INTO Encuentros (Patient_id, Fecha, Subjetivo, Objetivo, Diagnostico, Observaciones) VALUES (?, ?, ?, ?, ?, ?)',
                            (self.patient_id, self.date, self.subjective, self.objective, self.diagnosis, self.observations))
         else:
-            cursor.execute('INSERT INTO Encuentros (ID_paciente, fecha, observaciones) VALUES (?, ?, ?)',
+            cursor.execute('INSERT INTO Encuentros (Patient_id, Fecha, Observaciones) VALUES (?, ?, ?)',
                            (self.patient_id, self.date, self.observations))
 
         conn.commit()
